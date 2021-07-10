@@ -1,0 +1,82 @@
+<div class="card single-post">
+  <div class="header"><h3>Visualizar Postagem</h3></div>
+  <div class="body">
+    <div class="list row">
+      <div class="col-md-6 col-lg-6">
+        <div class="card single-post">
+          <div class="header"></div>
+          <div class="body">
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.description }}</p>
+          </div>
+        </div>
+
+        <!-- COMENTARIOS -->
+
+        <div class="card single-post">
+          <div class="header"><h3>COMENTARIOS</h3></div>
+          <div class="body">
+            <ul class="comment-reply list-unstyled">
+              <li class="clearfix" *ngFor="let comment of post.comments">
+                {{comment.description}}
+
+                <br />
+                <div class="row">
+                  <div class="col-md-6">
+                    Autor: {{comment.author?.user}}                  
+                  </div>
+                  <div class="col-md-6">
+                    <button
+                      class="btn btn-danger float-right"
+                      (click)="deleteComment(comment._id)"
+                    >
+                      <i class="fas fa-trash" title="Deletar"></i>
+                    </button>
+
+                  </div>
+                </div>
+
+                <p class="">
+                  <i
+                    class="fas fa-thumbs-up"
+                    (click)="ToggleReact('like', comment._id)"
+                  ></i
+                  ><span class="badge">42</span>
+                  <i
+                    class="fas fa-heart"
+                    (click)="ToggleReact('love', comment._id)"
+                  ></i
+                  ><span class="badge">42</span>
+                  <i
+                    class="fas fa-rainbow"
+                    (click)="ToggleReact('rainbow', comment._id)"
+                  ></i
+                  ><span class="badge">42</span>
+                </p>
+              </li>
+            </ul>
+          </div>
+          <form>
+            <input type="hidden" name="post_id" [(ngModel)]="post._id" />
+
+            <div class="form-group">
+              <label for="description">Comentários</label>
+              <input
+                class="form-control"
+                id="description"
+                required
+                [(ngModel)]="comment.description"
+                name="description"
+              />
+            </div>
+
+            <a class="btn btn-success" href="post">Voltar</a>
+            <button (click)="saveComment()" class="btn btn-success float-right">
+              Adicionar comentario.
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
